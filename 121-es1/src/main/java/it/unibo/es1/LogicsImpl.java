@@ -1,11 +1,16 @@
 package it.unibo.es1;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JButton;
 
 public class LogicsImpl implements Logics {
 
+	
+
 	public LogicsImpl(int size) {
-		//TODO Auto-generated constructor stub
+		final List<JButton> buttons = new ArrayList<>(size);
 	}
 
 	@Override
