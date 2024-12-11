@@ -7,10 +7,14 @@ import java.util.List;
 public class LogicsImpl implements Logics {
 
 	private final int size;
+	private List<Integer> value;
+	private List<Boolean> enable;
 	
 
 	public LogicsImpl(int size) {
 		this.size = size;
+		this.value = new ArrayList<>(size);
+		this.enable = new ArrayList<>(size);
 	}
 
 	@Override
@@ -20,19 +24,21 @@ public class LogicsImpl implements Logics {
 
 	@Override
 	public List<Integer> values() {
-		final List<Integer> value = new ArrayList<>(this.size());
-		for ( int count = 0; count < this.size(); count++){
-			value.add(count);
-		}
+		 if(this.value.isEmpty()){
+			for (int count = 0; count < this.size(); count++){
+				value.add(count);
+			}
+		 }
 		return value;
 	}
 
 	@Override
 	public List<Boolean> enablings() {
-		final List<Boolean> enable = new ArrayList<>(this.size());
-		for (int count = 0; count < this.size(); count++){
-			enable.add(true);
-		}
+		 if(this.enable.isEmpty()){
+			for (int count = 0; count < this.size(); count++){
+				enable.add(true);
+			}
+		 }
 		return enable;
 	}
 
