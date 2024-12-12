@@ -53,6 +53,9 @@ public class LogicsImpl implements Logics{
                 Random ran = new Random();
                 i=ran.nextInt(this.size());
                 j=ran.nextInt(this.size());
+                if (this.enabled()[i][j]){
+                    count++;
+                } 
                 this.enabled()[i][j] = true;
                 this.values().add(new Pair<Integer,Integer>(i,j));
             }
