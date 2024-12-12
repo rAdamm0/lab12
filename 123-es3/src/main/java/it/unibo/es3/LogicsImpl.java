@@ -7,7 +7,7 @@ public class LogicsImpl implements Logics{
 
     final int size;
     boolean[][] enable;    
-    final List<Pair<Integer,Integer>> value = new ArrayList<>();
+    List<Pair<Integer,Integer>> value = new ArrayList<>();
 
     public LogicsImpl(int size) {
         this.size = size;
@@ -31,15 +31,29 @@ public class LogicsImpl implements Logics{
         return this.enable;
     }
 
+    private void valueSetter(List<Pair<Integer,Integer>> temp){
+        this.value = temp;
+    }
+
     @Override
-    public <X, Y> List<Pair<X, Y>> values() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'values'");
+    public List<Pair<Integer, Integer>> values() {
+        return this.value;
     }
     @Override
     public void hit() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'hit'");
+    final List<Pair<Integer,Integer>> tempValue = new ArrayList<>();
+        
+        if (this.values().isEmpty()){
+            /*
+             * Generates randomly 3 stars  
+             */
+        }
+        for (Pair t : this.values()){
+            /*
+             * Set the 3x3 around the Pair as true and add them to tempValues if they were false 
+             */
+        }
+        valueSetter(tempValue);   
     }
     @Override
     public boolean toQuit() {

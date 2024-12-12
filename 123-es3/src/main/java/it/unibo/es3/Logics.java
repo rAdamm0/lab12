@@ -17,7 +17,7 @@ public interface Logics {
 	/**
 	 * @return a List of the last Pairs turned to true 
 	 */
-	<X,Y> List<Pair<X,Y>> values();
+	List<Pair<Integer,Integer>> values();
 	
 	/**
 	 * @return the new value a button should show after being pressed
