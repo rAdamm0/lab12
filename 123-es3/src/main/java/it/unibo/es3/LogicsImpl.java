@@ -3,6 +3,8 @@ package it.unibo.es3;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.Random;;
+
 public class LogicsImpl implements Logics{
 
     final int size;
@@ -42,11 +44,18 @@ public class LogicsImpl implements Logics{
     @Override
     public void hit() {
     final List<Pair<Integer,Integer>> tempValue = new ArrayList<>();
-        
+        int i, j;
         if (this.values().isEmpty()){
+            Random ran = new Random();
             /*
-             * Generates randomly 3 stars  
-             */
+            * Generates randomly 3 stars  
+            */
+            for (int count = 3; count > 0; count --){
+                i=ran.nextInt(this.size());
+                j=ran.nextInt(this.size());
+                this.enabled()[i][j] = true;
+                this.values().add(new Pair<Integer,Integer>(i,j));
+            }
         }
         for (Pair t : this.values()){
             /*
