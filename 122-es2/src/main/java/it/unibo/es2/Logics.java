@@ -20,7 +20,7 @@ public interface Logics {
 	/**
 	 * @return whether it is time to quit
 	 */
-	boolean toQuit();
+	boolean toQuit(Pair<Integer,Integer> elem);
 }
 
 

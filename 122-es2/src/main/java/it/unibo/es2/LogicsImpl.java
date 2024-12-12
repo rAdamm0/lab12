@@ -35,7 +35,15 @@ public class LogicsImpl implements Logics{
     }
 
     @Override
-    public boolean toQuit() {
+    public boolean toQuit(Pair<Integer,Integer> elem){
+        int i = 0, j = 0;
+        while (i < this.size() && j < this.size() && (this.values()[elem.getX()][j] || this.values()[i][elem.getY()])) {
+            i++;
+            j++;  
+        }
+        if(i == 4){
+            return true;
+        }
         return false;
     }
 
