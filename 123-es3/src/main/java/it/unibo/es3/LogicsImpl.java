@@ -1,26 +1,36 @@
 package it.unibo.es3;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LogicsImpl implements Logics{
 
     final int size;
-    boolean[][] value;    
+    boolean[][] enable;    
+    final List<Pair<Integer,Integer>> value = new ArrayList<>();
 
     public LogicsImpl(int size) {
         this.size = size;
-        this.value = null;
+        this.enable = null;
     }
 
     @Override
     public int size() {
         return this.size;
     }
+
+    private void enableSetter(){
+        this.enable = new boolean[this.size()][this.size()];
+    }
+
     @Override
     public boolean[][] enabled() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'enabled'");
+        if(this.value == null){
+            enableSetter();
+        }
+        return this.enable;
     }
+
     @Override
     public <X, Y> List<Pair<X, Y>> values() {
         // TODO Auto-generated method stub
