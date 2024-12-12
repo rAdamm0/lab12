@@ -46,21 +46,31 @@ public class LogicsImpl implements Logics{
     final List<Pair<Integer,Integer>> tempValue = new ArrayList<>();
         int i, j;
         if (this.values().isEmpty()){
-            Random ran = new Random();
             /*
             * Generates randomly 3 stars  
             */
             for (int count = 3; count > 0; count --){
+                Random ran = new Random();
                 i=ran.nextInt(this.size());
                 j=ran.nextInt(this.size());
                 this.enabled()[i][j] = true;
                 this.values().add(new Pair<Integer,Integer>(i,j));
             }
         }
-        for (Pair t : this.values()){
+        for (Pair q : this.values()){
             /*
              * Set the 3x3 around the Pair as true and add them to tempValues if they were false 
              */
+            for (int k = (int)q.getX()-1; k< (int)q.getX()+2; k++ ){
+                for (int l = (int)q.getY()-1; k< (int)q.getY()+2; l++){
+                    if (k>0 && k < this.size() && l >0 && l<this.size()){
+                        if(!enabled()[k][l]){
+                            enabled()[k][l] = true;
+                            tempValue.add(new Pair<Integer,Integer>(k, l));
+                        }
+                    }
+                }
+            }
         }
         valueSetter(tempValue);   
     }

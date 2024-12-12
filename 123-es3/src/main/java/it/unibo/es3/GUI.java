@@ -25,12 +25,17 @@ public class GUI extends JFrame {
         for (int i=0; i<width; i++){
             for (int j=0; j<width; j++){
             	var pos = new Pair<>(j,i);
-                final JButton jb = new JButton(pos.toString());
+                final JButton jb = new JButton();
+                jb.enableInputMethods(false);
                 this.cells.add(jb);
-                jb.addActionListener(al);
+                //jb.addActionListener(al);
                 panel.add(jb);
             }
         }
+        JPanel button = new JPanel(new BorderLayout());
+        JButton action = new JButton(">");
+        button.add(action);
+        this.getContentPane().add(button, BorderLayout.SOUTH);
         this.setVisible(true);
     }
     
