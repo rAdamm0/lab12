@@ -9,6 +9,8 @@ import java.util.List;
 public class GUI extends JFrame {
     
     private final List<JButton> cells = new ArrayList<>();
+
+    
     
     public GUI(int width) {
         final LogicsImpl logics = new LogicsImpl(width);
@@ -22,6 +24,17 @@ public class GUI extends JFrame {
         
         ActionListener al = e -> {
             logics.hit();
+            int count = 0;
+            for (int i=0; i<width; i++){
+                for (int j=0; j<width; j++){
+                    cells.get(count).setText(logics.enabled()[i][j] ? "*" : "");
+                    count++;
+                }
+            }
+            if(logics.toQuit()){
+                System.exit(1);
+            }
+            
         };
                 
         for (int i=0; i<width; i++){
@@ -40,6 +53,7 @@ public class GUI extends JFrame {
         action.addActionListener(al);
 
         this.setVisible(true);
+
     }
     
 }

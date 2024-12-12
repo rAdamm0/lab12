@@ -7,9 +7,9 @@ import java.util.Random;;
 
 public class LogicsImpl implements Logics{
 
-    final int size;
-    boolean[][] enable;    
-    List<Pair<Integer,Integer>> value = new ArrayList<>();
+    private final int size;
+    private boolean[][] enable;    
+    private List<Pair<Integer,Integer>> value = new ArrayList<>();
 
     public LogicsImpl(int size) {
         this.size = size;
@@ -41,6 +41,7 @@ public class LogicsImpl implements Logics{
     public List<Pair<Integer, Integer>> values() {
         return this.value;
     }
+
     @Override
     public void hit() {
     final List<Pair<Integer,Integer>> tempValue = new ArrayList<>();
@@ -49,24 +50,24 @@ public class LogicsImpl implements Logics{
             /*
             * Generates randomly 3 stars  
             */
-            for (int count = 3; count > 0; count --){
+            for (int count = 3; count > 0;){
                 Random ran = new Random();
                 i=ran.nextInt(this.size());
                 j=ran.nextInt(this.size());
-                if (this.enabled()[i][j]){
-                    count++;
+                if (!this.enabled()[i][j]){
+                    this.enabled()[i][j] = true;
+                    tempValue.add(new Pair<Integer,Integer>(i,j));
+                    count --;
                 } 
-                this.enabled()[i][j] = true;
-                this.values().add(new Pair<Integer,Integer>(i,j));
             }
         } else {
             for (Pair<Integer,Integer> q : this.values()){
                 /*
                  * Set the 3x3 around the Pair as true and add them to tempValues if they were false 
                  */
-                for (int k = (int)q.getX()-1; k< (int)q.getX()+2; k++ ){
-                    for (int l = (int)q.getY()-1; k< (int)q.getY()+2; l++){
-                        if (k>0 && k < this.size() && l >0 && l<this.size()){
+                 for (int k = (int)q.getX()-1; k< (int)q.getX()+2; k++ ){
+                    for (int l = (int)q.getY()-1; l< (int)q.getY()+2; l++){
+                        if (k>=0 && k < this.size() && l >=0 && l<this.size()){
                             if(!enabled()[k][l]){
                                 enabled()[k][l] = true;
                                 tempValue.add(new Pair<Integer,Integer>(k, l));
@@ -81,8 +82,14 @@ public class LogicsImpl implements Logics{
     }
     @Override
     public boolean toQuit() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toQuit'");
+        for (int i=0; i<this.size(); i++){
+            for (int j=0; j<this.size(); j++){
+                if(!this.enabled()[i][j]){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     
