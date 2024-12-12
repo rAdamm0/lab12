@@ -27,7 +27,7 @@ public class LogicsImpl implements Logics{
 
     @Override
     public boolean[][] enabled() {
-        if(this.value == null){
+        if(this.enable == null){
             enableSetter();
         }
         return this.enable;
@@ -56,22 +56,24 @@ public class LogicsImpl implements Logics{
                 this.enabled()[i][j] = true;
                 this.values().add(new Pair<Integer,Integer>(i,j));
             }
-        }
-        for (Pair q : this.values()){
-            /*
-             * Set the 3x3 around the Pair as true and add them to tempValues if they were false 
-             */
-            for (int k = (int)q.getX()-1; k< (int)q.getX()+2; k++ ){
-                for (int l = (int)q.getY()-1; k< (int)q.getY()+2; l++){
-                    if (k>0 && k < this.size() && l >0 && l<this.size()){
-                        if(!enabled()[k][l]){
-                            enabled()[k][l] = true;
-                            tempValue.add(new Pair<Integer,Integer>(k, l));
+        } else {
+            for (Pair<Integer,Integer> q : this.values()){
+                /*
+                 * Set the 3x3 around the Pair as true and add them to tempValues if they were false 
+                 */
+                for (int k = (int)q.getX()-1; k< (int)q.getX()+2; k++ ){
+                    for (int l = (int)q.getY()-1; k< (int)q.getY()+2; l++){
+                        if (k>0 && k < this.size() && l >0 && l<this.size()){
+                            if(!enabled()[k][l]){
+                                enabled()[k][l] = true;
+                                tempValue.add(new Pair<Integer,Integer>(k, l));
+                            }
                         }
                     }
                 }
             }
         }
+        
         valueSetter(tempValue);   
     }
     @Override
