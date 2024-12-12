@@ -1,6 +1,5 @@
 package it.unibo.es2;
 
-import java.util.Arrays;
 
 public class LogicsImpl implements Logics{
 
@@ -21,7 +20,7 @@ public class LogicsImpl implements Logics{
 
     @Override
     public boolean[][] values() {
-        if (this.value.length == 0){
+        if (this.value == null ){
             matrixSet(this.size());
         }
         return this.value;
@@ -37,8 +36,7 @@ public class LogicsImpl implements Logics{
 
     @Override
     public boolean toQuit() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toQuit'");
+        return false;
     }
 
 }
