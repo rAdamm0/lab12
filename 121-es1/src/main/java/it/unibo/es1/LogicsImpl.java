@@ -1,13 +1,18 @@
 package it.unibo.es1;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of the Logics interface.
  */
 public class LogicsImpl implements Logics {
 
-    private static final String ERROR_MESSAGE = "Unimplemented method";
+    // private static final String ERROR_MESSAGE = "Unimplemented method";
+    private List<Integer> values;
+    private List<Boolean> enabled;
 
     /**
      * Constructor.
@@ -15,7 +20,8 @@ public class LogicsImpl implements Logics {
      * @param size the size of the logics
      */
     public LogicsImpl(final int size) {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        this.values = new ArrayList<>(Collections.nCopies(size, 0));
+this.enabled = new ArrayList<>(Collections.nCopies(size, true));
     }
 
     /**
@@ -23,7 +29,7 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public int size() {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        return this.values.size();
     }
 
     /**
@@ -31,7 +37,7 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public List<Integer> values() {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        return Collections.unmodifiableList(values);
     }
 
     /**
@@ -39,7 +45,7 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public List<Boolean> enabledStates() {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        return Collections.unmodifiableList(enabled);
     }
 
     /**
@@ -47,7 +53,16 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public int hit(final int elem) {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        int nextValue = values.get(elem);
+        if (!enabled.get(elem)) {
+        } else {
+            nextValue++;
+            if (nextValue == values.size()) {
+                enabled.set(elem, false);
+            }
+            values.set(elem, nextValue);
+        }
+        return nextValue;
     }
 
     /**
@@ -55,7 +70,7 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public String result() {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        return "<<" + values.stream().map(a -> a.toString()).collect(Collectors.joining("|")) + ">>";
     }
 
     /**
@@ -63,6 +78,6 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public boolean toQuit() {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        return values.stream().distinct().count()==1;
     }
 }
