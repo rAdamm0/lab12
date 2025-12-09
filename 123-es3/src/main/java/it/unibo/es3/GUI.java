@@ -27,17 +27,32 @@ public final class GUI extends JFrame {
         // Create a panel with a grid layout
         final JPanel panel = new JPanel(new GridLayout(width, width));
         this.getContentPane().add(panel);
+        Logics logics = new LogicsImpl(width);
         // Create buttons and add them to the panel
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < width; j++) {
-                final var pos = new Pair<>(j, i);
-                final JButton button = new JButton(pos.toString());
+                final JButton button = new JButton();
                 this.cells.add(button);
-                button.addActionListener(e -> button.setText(String.valueOf(cells.indexOf(button))));
+                button.addActionListener(e -> {
+                    logics.hit();
+                    refresh(logics, width);
+                    if(logics.toQuit()){
+                        this.dispose();
+                    }
+                });
                 panel.add(button);
             }
         }
+        refresh(logics, width);
         pack();
         this.setVisible(true);
+    }
+
+    private void refresh(Logics logics, int width){
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < width; j++) {
+                this.cells.get(i*width+j).setText(logics.values()[i][j] ? "*" : "");
+            }
+        }
     }
 }
